@@ -12,6 +12,6 @@ npm start
 ```
 La page est consultable à l'adresse http://localhost:1234
 
-<center>
+<p align="center">
 	<img src="capture.png"></img>
-</center>
+</p>
