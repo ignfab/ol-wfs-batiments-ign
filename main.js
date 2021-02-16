@@ -9,13 +9,11 @@ import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { getWidth } from 'ol/extent';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { bbox as bboxStrategy } from 'ol/loadingstrategy';
+import { bbox as bboxStrategy, tile as tileStrategy } from 'ol/loadingstrategy';
 import VectorLayer from 'ol/layer/Vector';
 import { Stroke, Style, Fill } from 'ol/style';
 import materiaux_mur from './dmatgm.json';
 import materiaux_toit from './dmatto.json';
-
-
 
 // Infobulle
 var container = document.getElementById('popup');
@@ -72,7 +70,7 @@ var vectorSource = new VectorSource({
       ',EPSG:3857'
     );
   },
-  strategy: bboxStrategy,
+  strategy: tileStrategy(tileGrid),
 });
 
 var wfs = new VectorLayer({
@@ -94,8 +92,8 @@ var rasterSource = new WMTS({
   //layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
   //format: 'image/png'
   layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
-  matrixSet: 'PM',
   format: 'image/jpeg',
+  matrixSet: 'PM',
   projection: 'EPSG:3857',
   tileGrid: tileGrid,
   style: 'normal',
@@ -116,6 +114,7 @@ var map = new Map({
   target: document.getElementById('map'),
   view: new View({
     center: fromLonLat([3.280578, 47.368489]),
+    minZoom: 16,
     maxZoom: 20,
     zoom: 19,
   }),
@@ -130,13 +129,15 @@ map.on('singleclick', function (evt) {
     });
   if (feature) {
     var props = feature.getProperties();
-    //console.log(props)
-    var liste ="<ul>";
+    var id = feature.getId().replace("batiment.", "");
+    var liste = "<center><b>" + id + "</b></center>"
+    liste += "<ul>";
     for (const p in props) {
-      if (toPrint.includes(p) && props[p]!=null) {
+      if (props[p] != null && props[p] != "" && toPrint.includes(p)) {
         var value = props[p]
         if (p == "materiaux_des_murs") value = materiaux_mur[props[p]];
         if (p == "materiaux_de_la_toiture") value = materiaux_toit[props[p]];
+        if (value == "INDETERMINE" || value == false) continue;
         liste += "<li><b>" + p + "</b> : " + value + "</li>";
       }
     }
