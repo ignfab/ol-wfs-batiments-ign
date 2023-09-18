@@ -8,9 +8,9 @@ Popup au clic sur un bâtiment permettant de récupérer les informations sur ce
 
 ```
 npm install 
-npm start
+npm run dev
 ```
-La page est consultable à l'adresse http://localhost:1234
+La page est consultable à l'adresse http://127.0.0.1:5173/
 
 <p align="center">
 	<img src="capture.png"></img>
