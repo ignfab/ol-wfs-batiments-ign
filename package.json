@@ -1,17 +1,20 @@
 {
-  "name": "openlayers-wfs",
-  "version": "1.0.0",
-  "description": "",
+  "name": "ol-wfs-batiments-ign",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build --public-url . index.html"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "author": "esgn",
+  "author": "ignfab",
   "license": "ISC",
   "dependencies": {
-    "ol": "^8.1.0"
+    "ol": "6.9.0",
+    "geoportal-extensions-openlayers": "^3.3.4"
   },
   "devDependencies": {
-    "parcel": "^2.9.3"
+    "vite": "^4.4.5"
   }
 }
