@@ -2,7 +2,6 @@
   "name": "openlayers-wfs",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build --public-url . index.html"
@@ -10,9 +9,9 @@
   "author": "esgn",
   "license": "ISC",
   "dependencies": {
-    "ol": "^6.5.0"
+    "ol": "^8.1.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel": "^2.9.3"
   }
 }

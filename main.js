@@ -62,7 +62,7 @@ var vectorSource = new VectorSource({
   format: new GeoJSON(),
   url: function (extent) {
     return (
-      'https://wxs.ign.fr/choisirgeoportail/geoportail/wfs?service=WFS&' +
+      'https://wxs.ign.fr/essentiels/geoportail/wfs?service=WFS&' +
       'version=1.1.0&request=GetFeature&typename=BDTOPO_V3:batiment&' +
       'outputFormat=application/json&srsname=EPSG:3857&' +
       'bbox=' +
@@ -88,7 +88,7 @@ var wfs = new VectorLayer({
 
 // Couche WMTS PLAN IGN v2
 var rasterSource = new WMTS({
-  url: 'https://wxs.ign.fr/choisirgeoportail/geoportail/wmts',
+  url: 'https://wxs.ign.fr/essentiels/geoportail/wmts',
   //layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
   //format: 'image/png'
   layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
