@@ -84,13 +84,32 @@ var wfs = new VectorLayer({
       color: 'rgba(0, 0, 255, 0.2)'
     }),
   }),
+  minZoom: 16
 });
 
 // Couche WMTS PLAN IGN v2
-var rasterSource = new WMTS({
+var rasterSource1 = new WMTS({
   url: 'https://wxs.ign.fr/essentiels/geoportail/wmts',
-  //layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
-  //format: 'image/png'
+  layer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+  format: 'image/png',
+  matrixSet: 'PM',
+  projection: 'EPSG:3857',
+  tileGrid: tileGrid,
+  style: 'normal',
+  attributions:
+    '<a href="http://www.ign.fr" target="_blank">' +
+    '<img src="https://wxs.ign.fr/static/logos/IGN/IGN.gif" title="Institut national de l\'' +
+    'information géographique et forestière" alt="IGN"></a>',
+});
+
+var wmts1 = new TileLayer({
+  source: rasterSource1,
+  maxZoom: 16
+});
+
+// Couche WMTS ORTHO PHOTO
+var rasterSource2 = new WMTS({
+  url: 'https://wxs.ign.fr/essentiels/geoportail/wmts',
   layer: 'ORTHOIMAGERY.ORTHOPHOTOS',
   format: 'image/jpeg',
   matrixSet: 'PM',
@@ -103,18 +122,18 @@ var rasterSource = new WMTS({
     'information géographique et forestière" alt="IGN"></a>',
 });
 
-var wmts = new TileLayer({
-  source: rasterSource,
+var wmts2 = new TileLayer({
+  source: rasterSource2,
+  minZoom: 16
 });
 
 // Map OpenLayers
 var map = new Map({
-  layers: [wmts, wfs],
+  layers: [wmts1, wmts2, wfs],
   overlays: [overlay],
   target: document.getElementById('map'),
   view: new View({
     center: fromLonLat([3.280578, 47.368489]),
-    minZoom: 16,
     maxZoom: 20,
     zoom: 19,
   }),

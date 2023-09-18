@@ -23,7 +23,7 @@ jobs:
       - name: "Build App"
         run: npm run build
       - name: "Deploy React App to GitHub Pages"
-        uses: JamesIves/github-pages-deploy-action@4.1.8
+        uses: JamesIves/github-pages-deploy-action@4.4.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
